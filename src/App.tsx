@@ -5,15 +5,16 @@ import AppEntry from './containers/AppEntry'
 import { Layout } from './styles'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+export { default } from '../storybook'
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <Layout>
-        <NavigationContainer>
-          <AppEntry />
-        </NavigationContainer>
-      </Layout>
-    </Provider>
-  )
-}
+// export default function App() {
+//   return (
+//     <Provider store={store}>
+//       <Layout>
+//         <NavigationContainer>
+//           <AppEntry />
+//         </NavigationContainer>
+//       </Layout>
+//     </Provider>
+//   )
+// }
