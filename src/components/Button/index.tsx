@@ -1,18 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { TouchableOpacity } from 'react-native'
-import styles from './style'
+import { Layout } from './style'
 
-interface Props {
+export interface Props {
   onPress: () => void
+  height: string
+  width: string
+  color?: string
 }
 
-const Button: React.FC<Props> = ({ onPress, children }) => {
-  return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      {children}
-    </TouchableOpacity>
-  )
+const Button: React.FC<Props> = (props) => {
+  return <Layout {...props}>{props.children}</Layout>
 }
 
 export default Button

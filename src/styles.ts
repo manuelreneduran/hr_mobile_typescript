@@ -10,3 +10,7 @@ export const Layout = styled.View`
     color: red;
   }
 `
+export const globalStyles = {
+  primary: '#1dafa1',
+  fontFamily: 'LatoBold',
+}
