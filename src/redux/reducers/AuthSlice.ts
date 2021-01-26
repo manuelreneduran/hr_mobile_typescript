@@ -1,22 +1,44 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authAPI from '../../utils/adapters/authAPI'
 
-export const checkAuth = createAsyncThunk('users/fetchUser', async () => {
-  const response = await authAPI.fetch()
+export const fetchUser = createAsyncThunk('users/fetchUser', async () => {
+  const response = await authAPI.fetchUser()
   return response
 })
 
-export interface CurrentUser {
-  id: string
-  firstName: string
-  lastName: string
-  isAdmin: boolean
+export const login = createAsyncThunk(
+  'users/login',
+  async (userData: UserData) => {
+    const response = await authAPI.login(userData)
+    return response
+  }
+)
+
+export interface UserData {
   email: string
+  password: string
+}
+
+export interface CurrentUser {
+  email: string
+  firstName: string
+  middleName?: string
+  lastName: string
+  phoneNumber: string
+  isAdmin: boolean
+  address?: object
+  membership?: object[] | []
+  applications?: object[] | []
+  id: string
+  paymentSources?: object[] | []
+  createdAt: string
+  cards?: object[] | []
+  isApproved?: boolean
 }
 
 export interface AuthState {
   isAuth: boolean
-  currentUser: null | object
+  currentUser: null | CurrentUser
   status: string
   error?: string | null
 }
@@ -34,19 +56,35 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // builder pattern sets state and action types automatically
-    builder.addCase(checkAuth.pending, (state) => {
+    builder.addCase(fetchUser.pending, (state) => {
       state.status = 'loading'
       state.error = null
     })
-    builder.addCase(checkAuth.fulfilled, (state, action) => {
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.status = 'fulfilled'
       state.currentUser = action.payload
       state.error = null
     })
-    builder.addCase(checkAuth.rejected, (state, action) => {
+    builder.addCase(fetchUser.rejected, (state, action) => {
       state.status = 'error'
       state.currentUser = null
       state.error = action.error.message
+    })
+    builder.addCase(login.pending, (state) => {
+      state.status = 'loading'
+      state.error = null
+    })
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.status = 'fulfilled'
+      state.currentUser = action.payload
+      state.error = null
+      state.isAuth = true
+    })
+    builder.addCase(login.rejected, (state, action) => {
+      state.status = 'error'
+      state.currentUser = null
+      state.error = action.error.message
+      state.isAuth = false
     })
   },
 })
