@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import AppEntry from './containers/AppEntry'
 import { Layout } from './styles'

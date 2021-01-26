@@ -1,15 +1,9 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { AppThunk } from '../store'
-import { RootState } from './index'
-import axios from '../../../axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import authAPI from '../../utils/adapters/authAPI'
 
-const checkAuth = createAsyncThunk('users/getUsers', async () => {
-  try {
-    const response = await axios.get('/auth/user')
-    return response
-  } catch (e) {
-    return e
-  }
+export const checkAuth = createAsyncThunk('users/fetchUser', async () => {
+  const response = await authAPI.fetch()
+  return response
 })
 
 export interface CurrentUser {
@@ -39,8 +33,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // builder pattern sets state and action types automatically
     builder.addCase(checkAuth.pending, (state) => {
       state.status = 'loading'
+      state.error = null
     })
     builder.addCase(checkAuth.fulfilled, (state, action) => {
       state.status = 'fulfilled'
@@ -55,11 +51,6 @@ const authSlice = createSlice({
   },
 })
 
-export const reducer = authSlice.reducer
+export default authSlice.reducer
 
-// Slice
-
-//  initialState: {
-//     status: 'idle',
-//     error: null,
-//   },
+export const authSelector = (state: { auth: AuthState }) => state.auth
