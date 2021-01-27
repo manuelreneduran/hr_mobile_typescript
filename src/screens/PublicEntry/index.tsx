@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import Text from '../../components/Text'
+import { Layout } from './styles'
 
 const PublicEntry: React.FC = () => {
   return (
-    <View >
+    <Layout>
       <Text>Public Entry</Text>
-    </View>
+    </Layout>
   )
 }
 

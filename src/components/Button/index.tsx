@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from './style'
+import { Button as StyledButton } from './style'
 
 export interface Props {
   onPress: () => void
@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const Button: React.FC<Props> = (props) => {
-  return <Layout {...props}>{props.children}</Layout>
+  return <StyledButton {...props}>{props.children}</StyledButton>
 }
 
 export default Button

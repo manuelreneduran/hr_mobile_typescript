@@ -1,20 +1,17 @@
 import styled from 'styled-components/native'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen'
+import { wp, hp } from '../../utils'
 import { Props } from './index'
 
-export const Layout = styled.TouchableOpacity`
-  border-radius: 5;
+export const Button = styled.TouchableOpacity`
+  border-radius: 5px;
   background-color: #1dafa1;
-  height: ${(props: Props) => getHeight(props.height)};
-  width: ${(props: Props) => getWidth(props.width)};
+  height: ${(props: Props) => getButtonHeight(props.height)};
+  width: ${(props: Props) => getButtonWidth(props.width)};
   justify-content: center;
   align-items: center;
 `
 
-export const getHeight = (height: string): number => {
+export const getButtonHeight = (height: string): string => {
   switch (height) {
     case 'small':
       return hp('5%')
@@ -27,7 +24,7 @@ export const getHeight = (height: string): number => {
   }
 }
 
-export const getWidth = (width: string): number => {
+export const getButtonWidth = (width: string): string => {
   switch (width) {
     case 'small':
       return wp('20%')
