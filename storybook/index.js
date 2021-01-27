@@ -22,9 +22,7 @@ configure(() => {
 // To find allowed options for getStorybookUI
 const StorybookUIRoot = getStorybookUI({
   asyncStorage:
-    require('@react-native-community/async-storage').default ||
-    require('react-native').AsyncStorage ||
-    null,
+    require('@react-native-community/async-storage').default || null,
 })
 
 // If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
