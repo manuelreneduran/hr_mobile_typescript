@@ -9,8 +9,10 @@ interface Props {
     username: boolean
     password: boolean
   }
+  status: string
+  handleSubmit: () => void
 }
-const Login: React.FC<Props> = ({ errors }) => {
+const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
   return (
     <Layout>
       <Header>
@@ -32,7 +34,12 @@ const Login: React.FC<Props> = ({ errors }) => {
           />
         </Row>
         <Row>
-          <Button height='small' width='large' onPress={() => {}}>
+          <Button
+            loading={status === 'loading'}
+            height='small'
+            width='large'
+            onPress={handleSubmit}
+          >
             <Text color='white' size='large'>
               Login
             </Text>

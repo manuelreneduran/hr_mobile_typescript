@@ -5,4 +5,5 @@ export const Layout = styled.View`
   background-color: #fff;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `

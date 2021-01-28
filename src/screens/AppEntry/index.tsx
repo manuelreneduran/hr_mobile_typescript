@@ -5,6 +5,7 @@ import { Text, View, Button } from 'react-native'
 import { Layout } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser, login } from '../../redux/reducers/AuthSlice'
+import PublicEntry from '../PublicEntry'
 
 const AppEntry: React.FC = () => {
   const dispatch = useDispatch()
@@ -17,8 +18,7 @@ const AppEntry: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Button onPress={onPress} title='Login' />
+      <PublicEntry />
     </Layout>
   )
 }
