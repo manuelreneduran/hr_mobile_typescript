@@ -1,4 +1,4 @@
-import { partialAction as action } from '../../index'
+import { partialAction as action } from '../../actions'
 import { storiesOf } from '@storybook/react-native'
 import React from 'react'
 import Text from '../../../src/components/Text'

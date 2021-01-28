@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react-native'
-import { partialAction as action } from '../../index'
+import { partialAction as action } from '../../actions'
 import React from 'react'
 import Input from '../../../src/components/Input'
 import CenterView from '../CenterView'

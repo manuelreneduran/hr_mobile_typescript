@@ -1,6 +1,5 @@
 // if you use expo remove this line
 import { AppRegistry } from 'react-native'
-import { action } from '@storybook/addon-actions'
 import {
   getStorybookUI,
   configure,
@@ -10,14 +9,6 @@ import { withKnobs } from '@storybook/addon-knobs'
 
 import './rn-addons'
 
-// this eliminates the syntheticEvent errors that occur with
-// the traditional 'action' function
-export const partialAction = (actionName) => {
-  const beacon = action(actionName)
-  return (eventObj, ...args) => {
-    beacon({ ...eventObj, view: undefined }, ...args)
-  }
-}
 // enables knobs for all stories
 addDecorator(withKnobs)
 
