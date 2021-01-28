@@ -6,7 +6,7 @@ class authAPI {
   async fetchUser() {
     try {
       const response = await axios.get('/auth/user')
-      return response.data
+      return response.data.user
     } catch (e) {
       return Promise.reject(e.message)
     }
