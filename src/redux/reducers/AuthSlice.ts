@@ -1,18 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { AppDispatch } from '../store'
 import authAPI from '../../utils/adapters/authAPI'
-
-export const fetchUser = createAsyncThunk('users/fetchUser', async () => {
-  const response = await authAPI.fetchUser()
-  return response
-})
-
-export const login = createAsyncThunk(
-  'users/login',
-  async (userData: UserData) => {
-    const response = await authAPI.login(userData)
-    return response
-  }
-)
 
 export interface UserData {
   email: string
@@ -37,17 +25,81 @@ export interface CurrentUser {
 }
 
 export interface AuthState {
+  user: {
+    status: string
+    error?: string | null
+    data: null | CurrentUser
+  }
+  login: {
+    status: string
+    error?: string | null
+  }
+  bootstrap: {
+    status: string
+    error?: string | null
+  }
   isAuth: boolean
-  currentUser: null | CurrentUser
-  status: string
-  error?: string | null
 }
 
+export const fetchUser = createAsyncThunk('auth/user', async () => {
+  const response = await authAPI.fetchUser()
+  return response
+})
+
+export const login = createAsyncThunk(
+  'auth/login',
+  async (userData: UserData) => {
+    const response = await authAPI.login(userData)
+    return response
+  }
+)
+
+export const bootstrap = createAsyncThunk<
+  any,
+  undefined,
+  {
+    dispatch: AppDispatch
+    state: { auth: AuthState }
+    extra: any
+  }
+>('auth/bootstrap', async (...args) => {
+  const thunkAPI = args[1]
+  const getState = thunkAPI.getState
+  const dispatch = thunkAPI.dispatch
+  // guards against multiple requests
+  if (getState().auth.bootstrap.status === 'loading') {
+    return Promise.resolve()
+  }
+
+  let user = await getState().auth.user.data
+
+  if (!user) {
+    dispatch(fetchUser())
+  }
+
+  user = await getState().auth.user.data
+
+  if (user) {
+    // dispatch other action creators as needed
+  }
+  return Promise.resolve()
+})
+
 export const initialState: AuthState = {
+  user: {
+    status: 'idle',
+    error: null,
+    data: null,
+  },
+  login: {
+    status: 'idle',
+    error: null,
+  },
+  bootstrap: {
+    status: 'idle',
+    error: null,
+  },
   isAuth: false,
-  currentUser: null,
-  status: 'idle',
-  error: null,
 }
 
 const authSlice = createSlice({
@@ -57,34 +109,44 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     // builder pattern sets state and action types automatically
     builder.addCase(fetchUser.pending, (state) => {
-      state.status = 'loading'
-      state.error = null
+      state.user.status = 'loading'
+      state.user.error = null
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.status = 'fulfilled'
-      state.currentUser = action.payload
-      state.error = null
+      state.user.status = 'fulfilled'
+      state.user.data = action.payload
+      state.user.error = null
+      state.isAuth = true
     })
     builder.addCase(fetchUser.rejected, (state, action) => {
-      state.status = 'error'
-      state.currentUser = null
-      state.error = action.error.message
+      state.user.status = 'error'
+      state.user.data = null
+      state.user.error = action.error.message
+      state.isAuth = false
     })
     builder.addCase(login.pending, (state) => {
-      state.status = 'loading'
-      state.error = null
+      state.login.status = 'loading'
+      state.login.error = null
     })
     builder.addCase(login.fulfilled, (state, action) => {
-      state.status = 'fulfilled'
-      state.currentUser = action.payload
-      state.error = null
+      state.login.status = 'fulfilled'
+      state.user.data = action.payload
+      state.login.error = null
       state.isAuth = true
     })
     builder.addCase(login.rejected, (state, action) => {
-      state.status = 'error'
-      state.currentUser = null
-      state.error = action.error.message
+      state.login.status = 'error'
+      state.user.data = null
+      state.login.error = action.error.message
       state.isAuth = false
+    })
+    builder.addCase(bootstrap.pending, (state) => {
+      state.bootstrap.status = 'loading'
+      state.bootstrap.error = null
+    })
+    builder.addCase(bootstrap.fulfilled, (state) => {
+      state.bootstrap.status = 'fulfilled'
+      state.bootstrap.error = null
     })
   },
 })

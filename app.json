@@ -1,21 +1,19 @@
 {
   "expo": {
-    "name": "HR-Mobile-TS",
-    "slug": "HR-Mobile-TS",
+    "name": "hr_mobile_app_poc",
+    "slug": "hr_mobile_app_poc",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/image/splash-new.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2a5798"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

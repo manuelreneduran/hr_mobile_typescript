@@ -18,7 +18,6 @@ class authAPI {
       const response = await axios.post('/auth/login', { email, password })
       return response.data.user
     } catch (e) {
-      console.log('here', e.response?.data?.message)
       Alert({
         content: e.response?.data?.message || `Error - ${e.response.status}`,
       })

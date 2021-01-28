@@ -6,9 +6,14 @@ import { Layout } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser, login } from '../../redux/reducers/AuthSlice'
 import PublicEntry from '../PublicEntry'
+import { AppLoading } from 'expo'
+import useBootstrap from '../../hooks/useBootstrap'
+import { authSelector as authState } from '../../redux/reducers/AuthSlice'
 
 const AppEntry: React.FC = () => {
   const dispatch = useDispatch()
+  const { _cacheResourcesAsync, isReady, setIsReady } = useBootstrap()
+  // console.log('here', authState)
 
   const onPress = () => {
     dispatch(login({ email: 'test@higherrewards.com', password: '12345678' }))
