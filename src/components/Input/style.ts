@@ -4,7 +4,7 @@ import { Props } from './index'
 
 export const StyledTextInput = styled.TextInput`
   height: ${hp('5%')};
-  width: ${wp('70%')};
+  width: 100%;
   border-radius: 5px;
   overflow: hidden;
   background-color: white;

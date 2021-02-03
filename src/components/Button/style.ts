@@ -27,12 +27,12 @@ export const getButtonHeight = (height: string): string => {
 export const getButtonWidth = (width: string): string => {
   switch (width) {
     case 'small':
-      return wp('20%')
+      return wp('30%')
     case 'medium':
-      return wp('40%')
+      return wp('60%')
     case 'large':
-      return wp('70%')
+      return '100%'
     default:
-      return wp('40%')
+      return wp('100%')
   }
 }
