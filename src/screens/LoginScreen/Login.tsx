@@ -24,6 +24,7 @@ const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
         alignItems: 'center',
         borderWidth: 5,
         borderColor: 'orange',
+        width: '100%',
       }}
       // keyboardShouldPersistTaps='always'
     >

@@ -7,6 +7,8 @@ export const Layout = styled.View`
   align-items: center;
   justify-content: center;
   width: 100%;
+  border-width: 4;
+  border-color: green;
 `
 export const Row = styled.View`
   margin-bottom: 20px;
@@ -18,7 +20,7 @@ export const Header = styled.View`
   border-color: red;
 `
 export const MyAwareScrollView = styled(KeyboardAwareScrollView)`
-  flex-grow: 1;
+  flex: 1;
   background-color: #2a5798;
   width: 100%;
 `

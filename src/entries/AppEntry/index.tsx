@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
-import { Layout } from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser, login } from '../../redux/reducers/AuthSlice'
 import PublicEntry from '../PublicEntry'
@@ -8,6 +7,7 @@ import Loader from '../../components/Loader'
 import AppLoading from 'expo-app-loading'
 import useBootstrap from '../../hooks/useBootstrap'
 import { RootState } from '../../redux/reducers'
+import { NavigationContainer } from '@react-navigation/native'
 
 const AppEntry: React.FC = () => {
   const dispatch = useDispatch()
@@ -32,17 +32,13 @@ const AppEntry: React.FC = () => {
     )
   }
   if (bootstrapStatus !== 'idle' && bootstrapStatus !== 'fulfilled') {
-    return (
-      <Layout>
-        <Loader color='white' />
-      </Layout>
-    )
+    return <Loader color='white' />
   }
 
   return (
-    <Layout>
+    <NavigationContainer>
       <PublicEntry />
-    </Layout>
+    </NavigationContainer>
   )
 }
 

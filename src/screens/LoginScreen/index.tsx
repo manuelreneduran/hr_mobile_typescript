@@ -3,7 +3,9 @@ import Login from './Login'
 import { Layout } from './styles'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/reducers/AuthSlice'
-const LoginContainer: React.FC = () => {
+import { LoginScreenProps } from '../types'
+
+const LoginContainer: React.FC<LoginScreenProps> = ({ route, navigation }) => {
   const dispatch = useDispatch()
 
   const handleSubmit = () => {
