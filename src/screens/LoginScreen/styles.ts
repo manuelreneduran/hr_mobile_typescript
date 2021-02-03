@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 
 export const Layout = styled.View`
   flex: 1;
@@ -13,9 +14,17 @@ export const Row = styled.View`
 export const Header = styled.View`
   flex: 1;
   justify-content: center;
+  border-width: 5;
+  border-color: red;
 `
-
+export const MyAwareScrollView = styled(KeyboardAwareScrollView)`
+  flex-grow: 1;
+  background-color: #2a5798;
+  width: 100%;
+`
 export const Body = styled.View`
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
+  border-width: 5;
+  border-color: purple;
 `

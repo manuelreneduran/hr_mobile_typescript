@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Text from '../../components/Text'
-import { Layout, Row, Header, Body } from './styles'
+import { Layout, Row, Header, Body, MyAwareScrollView } from './styles'
 
 interface Props {
   errors?: {
@@ -14,7 +14,19 @@ interface Props {
 }
 const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
   return (
-    <Layout>
+    <MyAwareScrollView
+      // resetScrollToCoords={{ x: 0, y: 100 }}
+      // scrollEnabled={false}
+      contentContainerStyle={{
+        flexGrow: 1,
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 5,
+        borderColor: 'orange',
+      }}
+      // keyboardShouldPersistTaps='always'
+    >
       <Header>
         <Text>placeholder</Text>
       </Header>
@@ -46,7 +58,7 @@ const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
           </Button>
         </Row>
       </Body>
-    </Layout>
+    </MyAwareScrollView>
   )
 }
 
