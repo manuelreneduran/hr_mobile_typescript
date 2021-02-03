@@ -19,11 +19,7 @@ export const Header = styled.View`
   border-width: 5;
   border-color: red;
 `
-export const MyAwareScrollView = styled(KeyboardAwareScrollView)`
-  flex: 1;
-  background-color: #2a5798;
-  width: 100%;
-`
+export const MyAwareScrollView = styled(KeyboardAwareScrollView)``
 export const Body = styled.View`
   flex: 1;
   justify-content: center;

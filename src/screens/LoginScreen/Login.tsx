@@ -26,7 +26,7 @@ const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
         borderColor: 'orange',
         width: '100%',
       }}
-      // keyboardShouldPersistTaps='always'
+      keyboardShouldPersistTaps='never'
     >
       <Header>
         <Text>placeholder</Text>
