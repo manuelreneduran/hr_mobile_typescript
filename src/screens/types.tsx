@@ -3,3 +3,8 @@ import { PublicStackParamList } from '../entries/types'
 
 export type LoginScreenProps = StackScreenProps<PublicStackParamList, 'Login'>
 export type SignupScreenProps = StackScreenProps<PublicStackParamList, 'Signup'>
+
+export type LoginFormData = {
+  email: string
+  password: string
+}

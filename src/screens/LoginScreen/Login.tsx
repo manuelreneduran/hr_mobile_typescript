@@ -10,20 +10,28 @@ import {
   MyAwareScrollView,
   StyledImage,
 } from './styles'
+import { FieldError, DeepMap } from 'react-hook-form'
+import { LoginFormData } from '../types'
 
 interface Props {
-  errors?: {
-    username: boolean
-    password: boolean
-  }
+  errors: DeepMap<LoginFormData, FieldError>
   status: string
-  handleSubmit: () => void
+  submitHandler: ({ email, password }) => void
+  handleSubmit: any
+  setValue: any
 }
-const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
+
+const Login: React.FC<Props> = ({
+  errors,
+  status,
+  submitHandler,
+  handleSubmit,
+  setValue,
+}) => {
   return (
     <MyAwareScrollView
-      // resetScrollToCoords={{ x: 0, y: 100 }}
-      // scrollEnabled={false}
+      resetScrollToCoords={{ x: 0, y: 100 }}
+      scrollEnabled={false}
       contentContainerStyle={{
         flexGrow: 1,
         justifyContent: 'center',
@@ -39,15 +47,22 @@ const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
       <Body>
         <Row>
           <Input
-            placeholder='Username'
-            error={errors?.username || false}
-            errorMessage='Missing username'
+            placeholder='Email'
+            onChangeText={(text) => {
+              setValue('email', text)
+            }}
+            error={!!errors.email}
+            errorMessage='Missing email address'
           />
         </Row>
         <Row>
           <Input
             placeholder='Password'
-            error={errors?.password || false}
+            onChangeText={(text) => {
+              setValue('password', text)
+            }}
+            secureTextEntry={true}
+            error={!!errors.password}
             errorMessage='Password must be greater than 8 characters'
           />
         </Row>
@@ -56,7 +71,7 @@ const Login: React.FC<Props> = ({ errors, status, handleSubmit }) => {
             loading={status === 'loading'}
             height='small'
             width='large'
-            onPress={handleSubmit}
+            onPress={handleSubmit(submitHandler)}
           >
             <Text color='white' size='large'>
               Login

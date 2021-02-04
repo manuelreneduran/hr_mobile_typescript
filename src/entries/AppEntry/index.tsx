@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser, login } from '../../redux/reducers/AuthSlice'
 import PublicEntry from '../PublicEntry'
+import CoreEntry from '../CoreEntry'
 import Loader from '../../components/Loader'
 import AppLoading from 'expo-app-loading'
 import useBootstrap from '../../hooks/useBootstrap'
@@ -14,7 +15,9 @@ const AppEntry: React.FC = () => {
 
   const { _cacheResourcesAsync, isReady, setIsReady } = useBootstrap()
 
-  const { bootstrap, user } = useSelector((state: RootState) => state.auth)
+  const { bootstrap, user, isAuth } = useSelector(
+    (state: RootState) => state.auth
+  )
   const { status: bootstrapStatus } = bootstrap
   const { data: userData } = user
 
@@ -35,9 +38,11 @@ const AppEntry: React.FC = () => {
     return <Loader color='white' />
   }
 
+  const userExists = !!userData
+
   return (
     <NavigationContainer>
-      <PublicEntry />
+      {userExists ? <CoreEntry /> : <PublicEntry />}
     </NavigationContainer>
   )
 }

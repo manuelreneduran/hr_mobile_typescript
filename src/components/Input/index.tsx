@@ -3,10 +3,11 @@ import Text from '../Text'
 import { StyledTextInput, Layout } from './style'
 
 export interface Props {
-  onChangeText?: () => {}
+  onChangeText?: any
   error?: boolean
   errorMessage?: string
   placeholder?: string
+  secureTextEntry?: boolean
 }
 
 const Input: React.FC<Props> = ({
@@ -18,9 +19,12 @@ const Input: React.FC<Props> = ({
     <Layout>
       <StyledTextInput
         autoCapitalize='none'
-        autocorrect={false}
+        autoCorrect={false}
         error={error}
         onChangeText={onChangeText}
+        blurOnSubmit={true}
+        clearTextOnFocus={true}
+        secureTextEntry={false}
         {...rest}
       />
       {error && <Text color='#EF594C'>{rest.errorMessage}</Text>}
