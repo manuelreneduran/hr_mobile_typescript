@@ -15,9 +15,10 @@ const AppEntry: React.FC = () => {
 
   const { _cacheResourcesAsync, isReady, setIsReady } = useBootstrap()
 
-  const { bootstrap, user, isAuth } = useSelector(
+  const { bootstrap, user, isAuth, login } = useSelector(
     (state: RootState) => state.auth
   )
+  const { status: loginStatus } = login
   const { status: bootstrapStatus } = bootstrap
   const { data: userData } = user
 
@@ -34,8 +35,9 @@ const AppEntry: React.FC = () => {
       />
     )
   }
-  if (bootstrapStatus !== 'idle' && bootstrapStatus !== 'fulfilled') {
-    return <Loader color='white' />
+
+  if (bootstrapStatus === 'loading' || loginStatus === 'loading') {
+    return <Loader color='blue' />
   }
 
   const userExists = !!userData

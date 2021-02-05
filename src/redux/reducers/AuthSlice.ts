@@ -41,6 +41,14 @@ export interface AuthState {
   isAuth: boolean
 }
 
+const timer = async (ms) => {
+  return new Promise((res, rej): void => {
+    setTimeout(() => {
+      res(null)
+    }, ms)
+  })
+}
+
 export const fetchUser = createAsyncThunk('auth/user', async () => {
   const response = await authAPI.fetchUser()
   return response
@@ -50,6 +58,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (userData: UserData) => {
     const response = await authAPI.login(userData)
+    await timer(5000)
     return response
   }
 )
